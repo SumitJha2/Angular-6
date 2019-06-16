@@ -1,0 +1,149 @@
+
+<div class="modal fade" id="invoiceAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="margin-left:290px;">
+    <div class="modal-content" style="width:190%;margin-left:0px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Invoice</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form #invoiceForm="ngForm" (ngSubmit)="onSubmit(invoiceForm)" >
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                <label for="Name">Invoice No.</label>
+                <input  class="form-control" id="InvoiceNo" name="InvoiceNo" #InvoiceNo="ngModel" [(ngModel)]="invoiceService.selectedInvoice.InvoiceNo" placeholder="InvoiceNo">
+                 </div>
+                 <div class="form-group col-md-4">
+                <label for="Name">Order No.</label>
+                <input   class="form-control" id="OrderNo" name="OrderNo" #InvoiceNo="ngModel" [(ngModel)]="invoiceService.selectedInvoice.OrderNo" placeholder="OrderNo">
+              </div>
+          <div class="form-group col-md-4">
+                  <label for="Name">Order Date</label>
+                  <input type="date" class="form-control" id="OrderDate" name="OrderDate" #InvoiceNo="ngModel" [(ngModel)]="invoiceService.selectedInvoice.OrderDate" placeholder="OrderDate">
+                </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                <label for="Name">Challan No.</label>
+                <input  class="form-control" id="ChallanNo" name="ChallanNo" #InvoiceNo="ngModel" [(ngModel)]="invoiceService.selectedInvoice.ChallanNo" placeholder="ChallanNo">
+                 </div>
+                 <div class="form-group col-md-4">
+                  <label for="Name">Customer</label>                 
+                  <select  class="custom-select" id="CustomerID" name="CustomerID"  [(ngModel)]="invoiceService.selectedInvoice.CustomerID">
+                    <option selected>Please...</option>
+                    <option *ngFor="let type of invoiceService.selectedInvoice.CustomerList" value={{type.CustomerID}} >{{type.CustomerName}}</option>
+                  </select>
+                
+              </div>
+              <div class="form-group col-md-4">
+                  <label for="Name">Invoice Date</label>
+                  <input type="date" class="form-control" id="InvoiceDate" name="InvoiceDate" #InvoiceDate="ngModel" [(ngModel)]="invoiceService.selectedInvoice.InvoiceDate" placeholder="InvoiceDate">
+                </div>
+              </div>
+              <div style="height:10px;border:2px salmon;">
+                  <h6 class="modal-title">Add Product</h6>
+              </div>
+              <br>
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                <label for="Name">Particular</label>
+                <input  class="form-control" id="Particular" name="Particular" #Particular="ngModel" [(ngModel)]="InvoiceDetail.Particular" placeholder="Particular">
+                 </div>
+                 <div class="form-group col-md-4">
+                <label for="Name">Length</label>
+                <input   class="form-control" id="Length" name="Length" #Length="ngModel" [(ngModel)]="InvoiceDetail.Length" placeholder="Length">
+              </div>
+
+              <div class="form-group col-md-4">
+                  <label for="Name">Width</label>
+                  <input   class="form-control" id="Width" name="Width" #Width="ngModel" [(ngModel)]="InvoiceDetail.Width" placeholder="Width">
+                </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-4">
+                      <label for="Name">Qty</label>
+                      <input  class="form-control" id="Qty" name="Qty" #Qty="ngModel" [(ngModel)]="InvoiceDetail.Qty" placeholder="Qty">
+                       </div>
+                  <div class="form-group col-md-4">
+                <label for="Name">Price</label>
+                <input  class="form-control" id="Amount" name="Amount" #Price="ngModel"  [(ngModel)]="InvoiceDetail.Amount" placeholder="Price">
+                 </div>
+                 <div class="form-group col-md-4">
+                    <label ></label>
+                   <button type="button" class="btn btn-primary" (click)="AddProduct()" >Add</button>
+                </div>
+                </div>
+                <!-- display list of product -->
+                <div class="form-group col-md-12">
+
+                  <div class="row rowcustom">
+                    <div class="col border"  style="width:100px !important">
+                     Particular
+                   </div>
+                    <div class="col border"  style="width:100px !important">
+                      Length
+                   </div>
+                   <div class="col border">
+                     Width
+                   </div>
+                   <div class="col border">
+                    Qty
+                   </div>
+                   <div class="col border">
+                     Rate
+                   </div>
+                   <div class="col border">
+                    Price
+                  </div>
+                   <div class="col border">
+                      Action
+                   </div>
+                   </div>
+                   <div class="row"  *ngFor="let inv of invoiceService.selectedInvoice.InvoiceDetailList;
+                  let i=index;let o=odd;let e=even;" [ngClass]="{odd:o,even:e}">
+                      <div class="col border" style="width:100px !important">
+                          {{inv.Particular}}
+                     </div>
+                     <div class="col border">
+                        {{inv.Length}}
+                   </div>
+                   <div class="col border">
+                      {{inv.Width}} 
+                  </div>
+                  <div class="col border">
+                      {{inv.Qty}}
+                  </div>
+                  <div class="col border">
+                      {{inv.Amount}}
+                  </div>
+                  
+                  <div class="col border">
+                    <button  title="Add" class="btn btn-primary" [routerLink]="['/customeradd']"  data-toggle="modal" data-target="#customerAddModal" >Edit</button>
+                   &nbsp; <button  title="Delete" class="btn btn-primary" (click)="deleteCustomer(cust.CustomerID)"style="background-color:maroon">X</button>
+                  </div>
+                  </div> 
+
+                </div>
+                 <!-- display list of product -->
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                  <label for="Name">Net Total</label>
+                  <input  class="form-control" id="NetTotal" name="NetTotal" #NetTotal="ngModel" [(ngModel)]="invoiceService.selectedInvoice.NetTotal" disabled>
+                   </div>
+                   </div>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" routerLink='/customer' data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" >Save</button>
+            </div>
+        </form>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

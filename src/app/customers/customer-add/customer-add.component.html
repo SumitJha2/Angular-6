@@ -1,0 +1,66 @@
+
+<div class="modal fade" id="customerAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form #customerForm="ngForm" (ngSubmit)="onSubmit(customerForm)" >
+              <div class="form-group ">
+                <label for="Name">Name</label>
+                <input  class="form-control" id="Name" name="CustomerName" #CustomerName="ngModel" [(ngModel)]="customerService.selectedCustomer.CustomerName" placeholder="Name">
+              </div>
+              <div class="form-group ">
+                <label for="Name">Customer Type</label>                 
+                <select  class="custom-select" id="CustomerType" name="CustomerTypeID"  [(ngModel)]="customerService.selectedCustomer.CustomerTypeID" (ngModelChange)="onCustomerTypeSelected($event)" >
+                  <option selected>Choose...</option>
+                  <option *ngFor="let type of customerTypeList" value={{type.ID}} >{{type.Type}}</option>
+                </select>
+              </div>
+           
+            <div class="form-group">
+              <label for="BillingAddress">Billing Address</label>
+              <textarea class="form-control" rows="3" name="BillingAddress" #BillingAddress="ngModel" [(ngModel)]="customerService.selectedCustomer.BillingAddress" id="BillingAddress" placeholder="Billing Address"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="BillingAddress">Shipping Address</label>
+              <textarea class="form-control" name="ShippingAddress" #ShippingAddress="ngModel" [(ngModel)]="customerService.selectedCustomer.ShippingAddress" id="ShippingAddress" rows="3" placeholder="Shipping Address"></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="Vat">VAT</label>
+                <input  class="form-control" name="VAT" #VAT="ngModel" [(ngModel)]="customerService.selectedCustomer.VAT" id="VAT" placeholder="Vat">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="Gst">GST</label>
+                <input  class="form-control" name="GST" #GST="ngModel" [(ngModel)]="customerService.selectedCustomer.GST" id="GST" placeholder="Gst">
+              </div>
+            </div>
+            <div class="form-group">
+            <div class="input-group mb-6">
+                <label for="Photo">Photo</label>
+              <div class="custom-file">
+                  
+                <input type="file" class="custom-file-input"  id="file" accept="image/*" name="File" (change)="handleFileInput($event.target.files)">
+                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+              </div>
+              <div class="input-group-append">
+                  <button type="button" class="btn btn-primary" mat-raised-button color="primary" (click)="uploadFileToActivity()">Upload</button>
+               
+              </div>
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" routerLink='/customer' data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" >Save</button>
+            </div>
+        </form>
+      </div>
+     
+    </div>
+  </div>
+</div>

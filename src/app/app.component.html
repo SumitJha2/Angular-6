@@ -1,0 +1,36 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <div style="text-align:center">
+ <a  routerLink='/customer'>Customer</a>
+ <a  routerLink='/invoice'>Invoice</a>
+</div> -->
+
+<div class="container">
+  <div class="row">
+      <div class="col-12">
+       
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+          <button name="lgnbtn" id="lgnbtn" class="nav-link" [routerLink]="['/login']"   data-toggle="modal" data-target="#loginModal" >Login</button>
+        </li>
+    <li class="nav-item">
+      <a class="nav-link" id="customer-tab" data-toggle="tab" routerLink='/'>DashBord</a> 
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="customer-tab" data-toggle="tab" routerLink='/customer'>Customer</a> 
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" id="invoice-tab" data-toggle="tab"role="tab" routerLink='/invoice'>Invoice</a>
+    </li>
+  </ul>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+    <!-- <div class="row">
+      <div class="col-xs-12">
+        
+      </div>
+    </div> -->
+  </div>
+   

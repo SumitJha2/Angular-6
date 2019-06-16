@@ -1,0 +1,74 @@
+<br/>
+<div class="row">
+    <div class="col" style="padding-Left:95%">
+       <button  title="Add" class="btn btn-primary" routerLink='/customeradd'  data-toggle="modal" data-target="#customerAddModal" >Add</button>
+       <!-- <button  title="Add" class="btn btn-primary" routerLink='/customeradd' >Add</button> -->
+      </div>
+</div>
+<div class="form-group ">
+    <label for="Name">Customer Type</label>                 
+    <select  class="custom-select" id="CustomerType" name="CustomerTypeID"  [(ngModel)]="customerService.selectedCustomer.CustomerTypeID" (ngModelChange)="onCustomerTypeSelected($event)" >
+      <option selected>Choose...</option>
+      <option *ngFor="let type of customerTypeList" value={{type.ID}} >{{type.Type}}</option>
+    </select>
+  </div>
+<div class="row rowcustom">
+  <div class="col border"  style="width:100px !important">
+    Photo
+ </div>
+  <div class="col border"  style="width:100px !important">
+    Type
+ </div>
+ <div class="col border">
+    Name
+ </div>
+ <div class="col border">
+   Billing Address
+ </div>
+ <div class="col border">
+    Shipping Address
+ </div>
+ <div class="col border">
+    VAT
+ </div>
+ <div class="col border">
+    GST
+ </div>
+ <div class="col border">
+    Action
+ </div>
+ </div>
+<div class="row"  *ngFor="let cust of customerService.customerList;
+let i=index;let o=odd;let e=even;" [ngClass]="{odd:o,even:e}">
+<div class="col border" style="width:100px !important">
+      <img src="{{cust.ImagePath}}" height="50px" width="50px">
+   </div>
+    <div class="col border" style="width:100px !important">
+        {{cust.CustomerType|customepipe:'cust.CustomerType'}}
+       
+   </div>
+   <div class="col border">
+      {{cust.CustomerName}}
+ </div>
+ <div class="col border">
+    {{cust.BillingAddress}} 
+</div>
+<div class="col border">
+    {{cust.ShippingAddress|lowercase}}
+</div>
+<div class="col border">
+    {{cust.VAT}}
+</div>
+<div class="col border">
+    {{cust.GST}}
+</div>
+<div class="col border">
+     
+  <button  title="Add" class="btn btn-primary" [routerLink]="['/customeradd']" [queryParams]="{customerId:cust.CustomerID}"  data-toggle="modal" data-target="#customerAddModal" >Edit</button>
+ &nbsp; <button  title="Delete" class="btn btn-primary" (click)="deleteCustomer(cust.CustomerID)"style="background-color:maroon">X</button>
+</div>
+  </div>
+
+ 
+
+  

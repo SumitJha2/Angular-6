@@ -1,0 +1,65 @@
+<br/>
+<div class="row">
+    <div class="col" style="padding-Left:95%">
+       <button  title="Add" class="btn btn-primary" routerLink='/Invoiceadd'  data-toggle="modal" data-target="#invoiceAddModal" >Add</button>
+       <!-- <button  title="Add" class="btn btn-primary" routerLink='/customeradd' >Add</button> -->
+      </div>
+</div>
+<div class="form-group ">
+    <!-- <label for="Name">Customer Type</label>                 
+    <select  class="custom-select" id="CustomerType" name="CustomerTypeID"  [(ngModel)]="customerService.selectedCustomer.CustomerTypeID" (ngModelChange)="onCustomerTypeSelected($event)" >
+      <option selected>Choose...</option>
+      <option *ngFor="let type of customerTypeList" value={{type.ID}} >{{type.Type}}</option>
+    </select> -->
+  </div>
+<div class="row rowcustom">
+  <div class="col border"  style="width:100px !important">
+   Invoice No
+ </div>
+  <div class="col border"  style="width:100px !important">
+    Order No
+ </div>
+ <div class="col border">
+   Customer
+ </div>
+ <div class="col border">
+  Challan No
+ </div>
+ <div class="col border">
+   Net Amount
+ </div>
+ 
+ <div class="col border">
+    Action
+ </div>
+ </div>
+<div class="row"  *ngFor="let cust of invoiceService.invoiceList;
+let i=index;let o=odd;let e=even;" [ngClass]="{odd:o,even:e}">
+
+    <div class="col border" style="width:100px !important">
+        {{cust.InvoiceNo}}
+       
+   </div>
+   <div class="col border">
+      {{cust.OrderNo}}
+ </div>
+ <div class="col border">
+    {{cust.CustomerName}} 
+</div>
+<div class="col border">
+    {{cust.ChallanNo}}
+</div>
+<div class="col border">
+    {{cust.NetTotal}}
+</div>
+
+<div class="col border">
+     
+  <button  title="Edit" class="btn btn-primary" [routerLink]="['/Invoiceadd']" [queryParams]="{InvoiceId:cust.InvoiceID}"  data-toggle="modal" data-target="#invoiceAddModal" >Edit</button>
+ &nbsp; <button  title="Delete" class="btn btn-primary" (click)="deleteCustomer(cust.CustomerID)"style="background-color:maroon">X</button>
+</div>
+  </div>
+
+ 
+
+  
